@@ -1,0 +1,42 @@
+Short Answer:
+
+1. Psuedocode is more similar to plain English so it is typically easier to read and understand big picture concepts without being distracted by syntax. Pseudocode is not directly related to any single programming language so it can be written and understood by teams or individuals regardless of what language(s) they know. Being more similar to plain English, pseudocode can be more easily read and comprehended by people that are not programmers.
+
+2. Pseudocode is not recognized by any IDE, console, or command line so it would only return errors.
+
+Programming Assignment:
+
+1.
+FUNCTION printLargest(firstNumber, secondNumber)
+  IF firstNumber is greater than secondNumber
+    PRINT firstNumber
+  ElSE IF secondNumber is greater than firstNumber
+    PRINT secondNumber
+  ELSE
+    PRINT numbers are the same
+
+2.
+FUNCTION printTo100
+  SET number to 0
+  WHILE number is less than 100
+    INCREMENT number
+    PRINT number
+  END WHILE
+
+3.
+FUNCTION findName(desiredFirst, desiredLast)
+  FOR each last name in phone book
+    IF desiredLast = last name in phone book
+      IF desiredFirst = first name in phone book
+        PRINT full name
+  END FOR
+4.
+function findName(desiredFirst, desiredLast) {
+  for(let i = 0; i < phonebook.length; i++) {
+    if(desiredLast === phonebook[i].lastName) {
+      if(desiredFirst === phonebook[i].firstName) {
+        return phonebook[i].firstName + phonebook[i].lastName;
+      }
+    }
+  }
+}
