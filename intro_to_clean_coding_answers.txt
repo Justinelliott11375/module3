@@ -1,0 +1,145 @@
+Exercises:
+
+1. In your own words, explain what clean code is and why it is important.
+
+Clean code is code that is easy to read, maintain, alter, and debug. Clean coding uses ideas such as the DRY and single responsibility principals, standardized naming conventions, appropriate nesting, and commenting only where necessary.
+
+2. Read this article about Toyota and their use of bad code. Although you may not yet understand all of the topics discussed, think about another commonly used object that relies on computers and explain what would happen if the code was not created to an acceptable standard.
+
+Traffic lights with faulty code controlling them could change colors abruptly, accidentally set all lights to green, or all sorts of other mistakes that could cause massive problems.
+
+3. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
+
+No. Function is simply named "do", its name should indicate what it is doing. The 3 variables/arguments used in the function are named "x", "y", and "z"; giving more descriptive variable names would make the code significantly more readable. Every line of code includes a comment describing it, not necessary if code is self-documented well enough. I feel that passing in Fahrenheit or Celsius as a second argument then using IF/ELSE statements to differentiate between the 2 conversions is messy. By applying the single responsibility principal and making these 2 conversions separate functions I eliminated the need for a second argument and the IF/ELSE statements. I didn't use any comments because i feel that if the function is one line and the name of the function states what the one line is doing it shouldn't need a comment. I suppose you could set the conversion to a third variable(as "z" was used in the example) and have the function return that variable, but the extra line didn't feel necessary.
+
+FUNCTION convertToCelsius(degrees)
+  PRINT (degrees - 32) * (5/9)
+END FUNCTION
+FUNCTION convertToFahrenheit(degrees)
+  PRINT (degrees * 1.8) + 32
+END FUNCTION
+
+4. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code.
+
+Yes, other than the abbreviation in the function name, perhaps "calculatePercent" or "calculatePercentage" would be better?
+
+5. Using pseudocode, refactor the code for the following examples using the principles you have learned in this checkpoint.
+
+  a. The following function prints the subtotal of a customer's transaction and receives payment accordingly.
+
+  FUNCTION checkOutCustomer(subtotal, discountRate, paymentType)
+    SET totalDue to subtotal * discountRate + (subtotal * tax)
+    PRINT "Your total due is " + totalDue
+    CALL getPayment RETURNING amount
+    IF paymentType = 'CASH' THEN
+      PRINT "Change due " + amount - totalDue
+    ELSE IF paymentType = 'CREDIT CARD' THEN
+      PRINT "Your card has been charged " + totalDue
+    END IF
+  END FUNCTION
+
+  b. The following function checks out a book if there are no issues with the guest's account.
+
+  FUNCTION checkOutBook(book, guest)
+    IF guest.accountActive AND NOT(guest.hasOverdueBooks) AND guest.outstandingFees = 0 THEN
+      APPEND book to guest.books
+      SET book.status to "Checked Out"
+      PRINT "Your books have been issued"
+    ELSE
+      PRINT "Unable to check out book"
+    END IF
+  END FUNCTION
+
+  c. The following class is a code snippet that should support the transactions a customer can perform at an ATM.
+
+CLASS BankAccount
+
+ FUNCTION displayBalance
+    PRINT balance
+ END FUNCTION
+
+ FUNCTION deposit(amount)
+    SET balance to balance + amount
+ END FUNCTION
+
+ FUNCTION withdraw(amount)
+     IF balance > amount THEN
+       SET balance to balance - amount
+     END
+ END FUNCTION
+END CLASS
+
+CLASS newAccount
+
+ FUNCTION creditCardOffer
+     IF NOT(customer.hasCreditCard) THEN
+         CALL offerCreditCard
+     END
+ END FUNCTION
+
+ FUNCTION checkStatus
+     IF NOT(customer.hasCheckingAccount) THEN
+         CALL offerCheckingAccount
+     END
+ END FUNCTION
+ END CLASS
+
+6. Square Given an array of integers, find out whether the sum of the integers is a perfect square. If it is a perfect square, return the square root, otherwise return the sum.
+
+Python:
+
+import math
+def findTotalSquare(listToSum):
+  sumOfList = sum(listToSum)
+  if math.sqrt(sumOfList).is_integer:
+    print(math.sqrt(sumOfList))
+  else:
+    print(sumOfList)
+
+Javascript:
+
+function findTotalSquare(arrayToSum){
+  let sumOfArray = 0;
+  for(let i = 0;i < arrayToSum.length;i++){
+    sumOfArray += arrayToSum[i];
+  }
+  if(Number.isInteger(Math.sqrt(sumOfArray))){
+    return Math.sqrt(sumOfArray)
+  }
+  else{
+    return sumOfArray;
+  }
+}
+
+
+7. Duplicate Given an array of integers, find out whether the array contains any duplicate elements. The function should return true if any value appears at least twice in the array, and false if every element is distinct.
+
+Python:
+
+def findDuplicate(listToSearch):
+  newList = []
+  for value in listToSearch:
+    if value not in newList:
+      newList.append(value)
+  # If any number occurs twice in the 1st list, the 2nd list will have a shorter length
+  if len(listToSearch) == len(newList):
+    return False
+  else:
+    return True
+
+
+Javascript:
+
+function findDuplicate(anArray){
+  for(let i = 0; i < anArray.length; i++){
+    for(let j = 0; j < anArray.length; j++){
+      if(anArray[i] === anArray[j] && i != j){
+        return true;
+      //j loop compares every index to index 0, then i loop increments, if values are same AND indices are different the function returns true
+      }
+    }
+  }
+  return false;
+}
+
+8. Anagram An anagram is a word, phrase, or name formed by rearranging the letters of another word. For example, spar can be formed from rasp. Given two strings, stringOne and stringTwo, determine if stringOne is an anagram of stringTwo. Assume that the strings contain only lowercase letters and do not worry about case-sensitivity. Hint: Your first task will be to convert the strings to arrays.
