@@ -1,0 +1,56 @@
+Exercises
+
+1. What is a hash table?
+
+A hash table is a data structure that stores data in key-value pairs in specific locations in an array. The keys are then converted into hash codes using a process called hashing.
+
+2. What is hashing?
+
+Hashing, typically using a hashing function or hashing algorithm, is the process of converting hash tables keys into hash codes. Hash table keys can be of different data types, use different lengths, and different alphabets. Converting these keys into hash codes makes them a specific, predetermined length, and only uses a predetermined alphabet(ex:base 10 for only numbers, base 16 for hexadecimal(0-9 and a-f)). These finite data constraints allow the computer to handle this information more quickly and predictably.
+
+3. How does a hash table store data?
+
+After converting the key to a hash code, the hashing function will mod its' output to figure out the actual index of an element with the function's capacity.
+
+4. How are hash tables and objects different?
+
+Hash tables hold collections of similar data associated with a unique key, objects bundle data  in property-value pairs
+
+5. Determine whether you would use a hash table or an object to store each of the following pieces of data:
+
+a. A list of pets and their unique names.
+
+hash table
+
+b. The name, age, and the birthday of your best friend.
+
+object
+
+c. The name and location of every company in a given city.
+
+hash table
+
+d. All of the books checked out from a library by a particular individual.
+
+object
+
+e. The primary and secondary phone numbers for a contact.
+
+hash table
+
+6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
+
+FUNCTION addCustomer(name, address, phoneNumber)
+  CREATE HashMapCustomer
+  STORE each phoneNumber(key) into HashMapCustomer and associate with name and address(value)
+
+7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
+FUNCTION trackInventory(inventory)
+  CREATE HashMapInventory
+  STORE each itemName(key) into HashMapInventory and associate with itemAmount(value)
+
+8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
+
+FUNCTION digitizeNewspaper(newspapers)
+  CREATE HashMapNewspaper
+  STORE each publisher and publication date (key) into HashMapNewspaper and associate with newspaper(value)
