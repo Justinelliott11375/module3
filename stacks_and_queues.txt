@@ -1,0 +1,71 @@
+Exercises
+
+1. What is the main difference between a stack and a queue?
+
+Stacks handle the most recent object first, queues handle the first object to arrive(the one that has been there the longest) first
+
+2. What are the similarities between stacks and queues?
+
+Both are linear, list-type data structures that use one method for adding data to the list and one method for removing it.
+
+3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+
+stacks, the most recent action would be the one that needed to be undone/redone, and further undo's or redo's would need to occur order continuing from the most recent
+
+Programming Questions
+
+You may program the following question in any language of your choice. Before you begin coding, write out a plan as to how you will solve the question.
+
+1. Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+Pseudocode:
+
+FUNCTION reverseString(originalString)
+  CREATE a new stack
+  FOR each character in originalString
+    CALL stack.push WITH character
+  END FOR
+  CREATE empty string to STORE reversedString
+  WHILE stack is not empty
+    CALL stack.pop RETURNING character
+    APPEND character to reversed
+  END WHILE
+  RETURN reversed
+END FUNCTION
+
+Python:
+
+def reverseString(string):
+  tempStack= []
+  for i in string:
+    tempStack.append(i)
+  reversedString = ''
+  while len(tempStack) > 0:
+    reversedString += tempStack.pop()
+  return reversedString
+
+Implement the delete functionality of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure.
+
+To delete an item, take all of the elements in the queue one at a time and put them at the end of the queue, except for the last one which should be deleted and returned.
+
+CLASS Stack
+  FUNCTION pop(queue)
+    FOR each item in queue
+      IF item is last element in queue
+        DELETE and RETURN item
+      ELSE
+        APPEND item to newQueue
+  END FUNCTION
+END CLASS
+
+3. Fill in the methods for the following Queue class so that it will work as expected (FIFO).
+
+CLASS QUEUE
+ FUNCTION enqueue(element)
+   APPEND element to the end of the list
+ END FUNCTION
+
+ FUNCTION dequeue
+   REMOVE and RETURN element at beginning of the list
+ END FUNCTION
+END CLASS
