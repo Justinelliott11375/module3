@@ -32,11 +32,11 @@ hash table
 
 d. All of the books checked out from a library by a particular individual.
 
-object
+hash table
 
 e. The primary and secondary phone numbers for a contact.
 
-hash table
+object 
 
 6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
 
