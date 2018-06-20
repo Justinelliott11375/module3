@@ -36,21 +36,151 @@ hash table
 
 e. The primary and secondary phone numbers for a contact.
 
-object 
+object
 
 6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers. Store this information in a hash table.
 
-FUNCTION addCustomer(name, address, phoneNumber)
-  CREATE HashMapCustomer
-  STORE each phoneNumber(key) into HashMapCustomer and associate with name and address(value)
+class Customer {
+  constructor(name, address, phoneNumber) {
+    this.name = name;
+    this.address = address;
+    this.phoneNumber = phoneNumber
+  }
+}
+
+function getHashCode(person){
+  return parseInt(person.phoneNumber);
+}
+
+function addCustomer(array, person){
+    hashCode = getHashCode(person)
+    let hashKey = hashCode % (array.length);
+    array.splice(hashKey, 1, person);
+}
+
+function lookUpCustomer(phoneNumber){
+  var customerIndex = parseInt(phoneNumber) % customerHashMap.length;
+  return customerHashMap[customerIndex];
+}
+
+var customerHashMap = new Array(10);
+
+var Justin = new Customer("Justin", "123 Address St", "7778889999")
+var Jim = new Customer("Jim", "174 Address Ln", "1112223333")
+var Sam = new Customer("Sam", "210 Address Ave", "2223334444")
+var Monty = new Customer("Monty", "560 Address Dr", "5556667777")
+
+addCustomer(customerHashMap, Justin);
+addCustomer(customerHashMap, Jim);
+addCustomer(customerHashMap, Sam);
+addCustomer(customerHashMap, Monty);
+
+function tests(number){
+  for(let i = number; i > 0; i--){
+    var phoneNumbers = ["7778889999","1112223333","2223334444","5556667777"]
+    var randomPhoneNumber = phoneNumbers[Math.floor(Math.random()*phoneNumbers.length)];
+    console.log(randomPhoneNumber, (lookUpCustomer(randomPhoneNumber)).name);
+  }
+}
+tests(30);
 
 7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
-FUNCTION trackInventory(inventory)
-  CREATE HashMapInventory
-  STORE each itemName(key) into HashMapInventory and associate with itemAmount(value)
+
+class Item {
+  constructor(name, department, skuNumber) {
+    this.name = name;
+    this.department = department;
+    this.skuNumber = skuNumber;
+  }
+}
+
+function getHashCode(item){
+  return parseInt(item.skuNumber);
+}
+
+function addItem(array, item){
+    hashCode = getHashCode(item)
+    let hashKey = hashCode % (array.length);
+    // console.log(hashKey);
+    array.splice(hashKey, 1, item);
+}
+
+function lookUpItem(skuNumber){
+  var itemIndex = parseInt(skuNumber) % inventoryHashMap.length;
+  return inventoryHashMap[itemIndex];
+}
+
+var inventoryHashMap = new Array(20);
+
+var hammer = new Item("hammer", "tools", "2236472536");
+var screwDriver = new Item("screwDriver", "tools", "7712365453");
+var sprayPaint = new Item("sprayPaint", "paint", "0090876789");
+var lawnMower = new Item("lawnMower", "lawn equipment", "1186687657");
+
+addItem(inventoryHashMap, hammer);
+addItem(inventoryHashMap, screwDriver);
+addItem(inventoryHashMap, sprayPaint);
+addItem(inventoryHashMap, lawnMower);
+
+function tests(number){
+  for(let i = number; i > 0; i--){
+    var inventorySkuNumbers = ["2236472536","7712365453","0090876789","1186687657"]
+    var randomInventoryNumber = inventorySkuNumbers[Math.floor(Math.random()*inventorySkuNumbers.length)];
+    console.log(randomInventoryNumber, (lookUpItem(randomInventoryNumber)).name);
+  }
+}
+
+tests(30);
 
 8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. Use hash tables to store the necessary data.
 
-FUNCTION digitizeNewspaper(newspapers)
-  CREATE HashMapNewspaper
-  STORE each publisher and publication date (key) into HashMapNewspaper and associate with newspaper(value)
+class Newspaper {
+  constructor(publisher, publicationDate, articleTitle) {
+    this.publisher = publisher;
+    this.publicationDate = publicationDate;
+    this.articleTitle = articleTitle
+  }
+}
+
+function getHashCode(publisher, publicationDate){
+  var str = publisher.concat(publicationDate);
+  var len = str.length;
+  var hash = 0;
+  for(i=0; i<len; i++){
+    char = str.charCodeAt((i));
+    hash += char;
+    }
+  // make number larger to reduce likelihood of collision
+  hash = Math.floor(Math.pow(hash, 2));
+
+  // if number is less than 10 digits, multiply to make it fixed length of 10
+  var hashLength = Math.floor(Math.log(hash) / Math.LN10 + 1);
+  if (hashLength < 10){
+    hash = hash * (10 ** (10 - hashLength));
+  }
+  return hash;
+}
+
+var hashMap = new Map();
+
+var moonLanding = new Newspaper("John Doe", "6/20/1969", "Man Lands on Moon");
+
+var jupiterFlyby = new Newspaper("Steve Smith", "12/3/1973", "Pioneer 10 Flies by Jupiter");
+
+var marsLanding = new Newspaper("Sam Hill", "7/20/1976", "Viking 1 Lands on Mars");
+
+function addToMap(map, article){
+  hashCode = getHashCode(article.publisher, article.publicationDate);
+  map.set(hashCode, article);
+}
+
+function lookUpArticle(publisher, publicationDate){
+  var hashCode = getHashCode(publisher, publicationDate);
+  return hashMap.get(hashCode);
+}
+
+addToMap(hashMap, moonLanding);
+addToMap(hashMap, jupiterFlyby);
+addToMap(hashMap, marsLanding);
+
+lookUpArticle('John Doe', '6/20/1969');
