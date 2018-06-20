@@ -1,0 +1,69 @@
+
+1. Using proper pseudo-code, describe the following primitive algorithms:
+
+Making coffee;
+
+PUT water in coffee maker
+PUT coffee filter in coffee maker
+IF coffee beans are ground
+  PUT grounds in filter
+ELSE
+  GRIND coffee beans, THEN put grounds in filter
+END IF
+PUT coffee mug in designated area under coffee maker
+WHILE water is heating
+  WAIT for water to heat
+END WHILE
+turn coffee maker on
+
+Washing dishes;
+
+TURN ON hot water
+WHILE number of dirty dishes > 0
+  APPLY soap to dish
+  SCRUB dish with sponge
+  PLACE dish in left side of sink
+END WHILE
+TURN OFF hot water
+TURN ON cold water
+WHILE number of washed dishes > 0
+  RINSE dish under cold water
+  PLACE dish on drying rack
+END WHILE
+TURN OFF cold water
+WHILE number of rinsed dishes > 0
+  DRY dish with towel
+  PUT dish in designated place
+END WHILE
+
+A choice of your own.
+Tuning a guitar:
+FUNCTION tuneString
+  WHILE string pitch is flat
+    RAISE string pitch with tuning key
+  END WHILE
+  WHILE string pitch is sharp
+    LOWER string pitch with tuning key
+  END WHILE
+END FUNCTION
+
+PLUG guitar into tuner
+TURN tuner on
+FOR EACH string on guitar
+  IF string is out of tune
+    CALL tuneString function
+  END IF
+END LOOP
+
+
+2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+Facebook marketing algorithm, targets ads specifically to the people most likely to respond to them based on location, age, other interests, etc. Helps advertisers get ads to most likely potential clients and avoid advertising to people with little or no interest in them.
+
+UPS VOLCANO algorithm, used to plan short term scheduling, handle peak Thanksgiving and Christmas seasons, and plan long term purchase of facilities and aircrafts. Has saved UPS estimated tens of millions of dollars since its inception in 2000.
+
+Tesco's 'rolling ball' algorithm, assigns attributes to each grocery item sold in Tesco grocery stores. Based on these attributes, the algorithm decides what items should be sold in each store, where they should be in the store, and which items should be grouped together or placed close to each other in the store.
+
+3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+An efficient algorithm should find an acceptable solution, in an acceptable amount of time, using an acceptable amount of resources. An algorithm that finds a solution that is "more correct" than necessary in a longer amount of time than an algorithm that finds a "correct enough" solution in a shorter amount of time would be considered somewhat inefficient. An algorithm that finds a good solution quickly but uses far too many resources would also be considered inefficient to some extent. 
