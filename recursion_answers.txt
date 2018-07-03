@@ -1,0 +1,177 @@
+Exercises
+For exercises requiring code, you are free to use the language of your choice.
+
+1. Define and compare recursion and iteration.
+
+Recursion is when a function makes a call to execute itself somewhere in the function body. Iteration is when a set of instructions loop or repeat continuously until a condition is met or all data has been iterated over. Recursive functions tend to run slower but be easier to implement and use less code. Iterative solutions tend to run faster but take more work and more code to implement.
+
+
+2. Name five algorithms that are commonly implemented by recursion.
+
+Factorial algorithm
+Fibonacci algorithm
+search algorithm for binary search tree
+Euclid's algorithm
+Dijkstra's algorithm
+
+
+3. When should you use recursion, and when should you avoid recursion? Give examples for each.
+
+Recursion is useful in cases such as quicksort, where when implemented correctly and efficiently it can out-perform other sorting algorithms while still using fewer lines of code.
+Recursion should be avoided when there is a possibility of the algorithm recursing too many times,. This uses an abundance of computer resources and can cause excessively slow speed, stack over flow and crashing. An example of this would be using the Fibonacci algorithm in its simplest form to high numbers(at around 40 or 45 the slow speed starts to become very prevalent)
+
+4. Compare the recursive and iterative solutions to the three algorithms from the checkpoint (Factorial, Maximum, and Fibonacci). What is similar, and what is different?
+
+The recursive solutions tend to be more "elegant" and use less code but also tend to use more resources and perform slower. Some of this slow performance can be negated by optimizing the algorithm to prevent some of the repetition. The iterative solutions tend to be faster but require more code to be written. They are similar in that there is always some element of repetition or "looping".
+
+5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+var myArray = [
+  2,
+  56,
+  [1,2,11,[2,3,4,5],3],
+  6,
+  5,
+  [1,2,3,4,5,[6,7,8],9,10],
+  [4,5,6],
+  [7,8,9],
+  10
+];
+
+
+function countArray(anArray){
+  counter = 0;
+  for(let i = 0; i < anArray.length; i++) {
+    if(Array.isArray(anArray[i])){
+      counter += countArray(anArray[i]);
+    } else {
+      counter++;
+    }
+  }
+  return counter;
+}
+
+countArray(myArray);
+
+
+
+6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+
+function isPalindrome(string) {
+  var i = 0;
+  var j = string.length - 1;
+  function compareChar(){
+    if(i > j){
+      return true;
+    }
+    if(string.charAt(i) === " "){
+      i++;
+    }
+    if(string.charAt(j) === " "){
+      j--;
+    }
+    if(string.charAt(i) === string.charAt(j)){
+      i++;
+      j--;
+      return compareChar();
+    }
+    else {
+      return false;
+    }
+  }
+  return compareChar();
+}
+
+function tests() {
+  console.log(isPalindrome('no lemon no melon'));
+  console.log(isPalindrome('ten am lonely tylenol manet'));
+  console.log(isPalindrome('hat'));
+  console.log(isPalindrome(drab as a fool aloof as a bard'))
+}
+
+tests()
+
+
+7. Laura and Xander are going door-to-door around their block looking for their lost cat. Write a recursive algorithm showing one way they can visit every house on their block exactly once.
+
+//function to create houses with name, address, whether or not the house is on the same block as the cat owners, and whether or not the cat owners have visited that house yet.
+
+function House(name, address, isOnSameBlock, hasBeenVisited){
+  this.name = name
+  this.address = address;
+  this.isOnSameBlock = isOnSameBlock;
+  this.hasBeenVisited = hasBeenVisited;
+  this.addNeighbors = function(left, right, across){
+    this.neighborToLeft = left;
+    this.neighborToRight = right;
+    this.neighborAcross = across;
+    this.neighbors = [left, right, across];
+  }
+
+}
+
+//create neighborhood(assuming Steve is the cat owner)
+
+var Steve = new House("Steve", "11 House St", true, true);
+var Jim = new House("Jim", "13 House St", true, false);
+var Stan = new House("Stan", "9 House St", true, false);
+var Tom = new House("Tom", "15 House St", true, false);
+var John = new House("John", "7 House St", true, false);
+var Sally = new House("Sally", "17 House St", true, false);
+var Tina = new House("Tina", "12 House St", true, false);
+var Jeff = new House("Jeff", "14 House St", true, false);
+var Chris = new House("Chris", "16 House St", true, false);
+var Brian = new House("Brian", "10 House St", true, false);
+var Tori = new House("Tori", "8 House St", true, false);
+var Laura = new House("Laura", "18 House St", true, false);
+var Alex = new House("Alex", "21 House St", false, false);
+var Jason = new House("Jason", "22 House St", false, false);
+var Harry = new House("Harry", "32 Lane St", false, false);
+var Ron = new House("Ron", "40 Lane St", false, false);
+var Hermione = new House("Hermione", "11 Way St", false, false);
+var Nick = new House("Nick", "19 Way St", false, false);
+
+//connect neighborhood by who is left, right, and across from who(if anyone).
+
+Steve.addNeighbors(Jim, Stan, Tina);
+Jim.addNeighbors(Tom, Steve, Jeff);
+Stan.addNeighbors(Steve, John, Brian);
+Tom.addNeighbors(Sally, Jim, Chris);
+John.addNeighbors(Stan, null, Tori);
+Sally.addNeighbors(Alex, Tom, Laura);
+Tina.addNeighbors(Brian, Jeff, Steve);
+Jeff.addNeighbors(Tina, Chris, Jim);
+Chris.addNeighbors(Jeff, Laura, Tom);
+Brian.addNeighbors(Tori, Tina, Stan);
+Tori.addNeighbors(null, Brian, John);
+Laura.addNeighbors(Chris, Jason, Sally);
+Alex.addNeighbors(null, Sally, Jason);
+Jason.addNeighbors(Laura, null, Alex);
+Harry.addNeighbors(null, Sally, Jason);
+Ron.addNeighbors(Laura, null, null);
+Hermione.addNeighbors(John, null, null);
+Nick.addNeighbors(null, Tori, null);
+
+function lookForCat(house) {
+  //make a clockwise circle around the block, if the neighbor to the left exists, is on the same block, and has not been checked yet, visit them.
+
+  if(house.neighborToLeft !== null && house.neighborToLeft.hasBeenVisited === false && house.neighborToLeft.isOnSameBlock === true){
+    house.neighborToLeft.hasBeenVisited = true;
+    console.log('tried ' + house.neighborToLeft.name + "'s house");
+    return lookForCat(house.neighborToLeft);
+  }
+
+  //if the end of the block is reached i.e. the next neighbor to the left is not still on the same block, cross the street and ask neighbors on the other side on the way back, crossing again at the other end of the block, then working back towards home.
+
+  else if(house.neighborAcross !== null && house.neighborAcross.hasBeenVisited === false && house.neighborAcross.isOnSameBlock === true){
+    house.neighborAcross.hasBeenVisited = true;
+    console.log('tried ' + house.neighborAcross.name + "'s house");
+    return lookForCat(house.neighborAcross);
+  }
+  else if(house.neighborToLeft === Steve){
+    console.log('Back at home')
+  }
+}
+
+lookForCat(Steve);
