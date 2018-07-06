@@ -1,0 +1,46 @@
+Exercises
+
+For exercises requiring code, you are free to use the language of your choice.
+
+1. Write pseudocode for bubble sort.
+
+FUNCTION bubbleSort(list)
+  REPEAT
+    SET swapped to false
+    FOR i = 0(index of first item in list) to (list length - 1)
+      IF list[i] is greater than list[i+1]
+        SET temp to list[i]
+        SET list[i] to list[i+1]
+        SET list[i+1] to temp
+        SET swapped to true
+      END IF
+    END FOR
+  UNTIL swapped is false
+  RETURN list
+END FUNCTION
+
+2. Write pseudocode for quicksort.
+
+FUNCTION quickSort(list)
+  SET pivot to list length - 1
+  SET left to new empty list
+  SET right to new empty list
+  FOR each item in list except pivot
+    IF item is less than pivot
+      PUSH item to left list
+    END IF
+    IF item is greater than pivot
+      PUSH item to right list
+    END IF
+  END FOR LOOP
+  RETURN new list [CALLING quickSort(left list), pivot, CALLING quickSort(right list)]
+END FUNCTION
+
+
+3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+
+While quick sort can be at worst quadratic, quick sort is most often logarithmic and merge sort is always logarithmic. Bubble sort, insertion sort, and selection sort are all on average quadratic(selection sort is always quadratic).
+
+4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+
+In a bucket sort, items in the list are each put into a number of "buckets" based on certain criteria(ex: if sorting a list of integers, each bucket could be a specific number range: 0-9,10-19, etc). Each bucket is then sorted individually, either by recursively calling the the bucket sort or using another sorting algorithm. Once the buckets are sorted, the sorted bucket contents are put back together into a single ordered list.
