@@ -61,33 +61,31 @@ countArray(myArray);
 function isPalindrome(string) {
   var i = 0;
   var j = string.length - 1;
-  function compareChar(){
-    if(i > j){
+  function compareChar(firstLetter, lastLetter){
+    if(firstLetter > lastLetter){
       return true;
     }
-    if(string.charAt(i) === " "){
-      i++;
+    if(string.charAt(firstLetter) === " "){
+      firstLetter++;
     }
-    if(string.charAt(j) === " "){
-      j--;
+    if(string.charAt(lastLetter) === " "){
+      lastLetter--;
     }
-    if(string.charAt(i) === string.charAt(j)){
-      i++;
-      j--;
-      return compareChar();
+    if(string.charAt(firstLetter) === string.charAt(lastLetter)){
+      return compareChar(firstLetter+1, lastLetter-1);
     }
     else {
       return false;
     }
   }
-  return compareChar();
+  return compareChar(i,j);
 }
 
 function tests() {
   console.log(isPalindrome('no lemon no melon'));
   console.log(isPalindrome('ten am lonely tylenol manet'));
   console.log(isPalindrome('hat'));
-  console.log(isPalindrome(drab as a fool aloof as a bard'))
+  console.log(isPalindrome('drab as a fool aloof as a bard'))
 }
 
 tests()
